@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .navbar {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 20px;
+    }
+    .navbar a {
+      color: #fff;
+      text-decoration: none;
+      margin-right: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+    .todo {
+      background-color: #f4f4f4;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+    .todo h3 {
+      margin-top: 0;
+    }
+    .todo p {
+      margin-bottom: 5px;
+    }
+    .todo .actions {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="navbar">
+
+  <a href="http://127.0.0.1:8000/additem/">New</a>
+  <a href="http://127.0.0.1:8000/showitem/">To-Do List</a>
+  <a href="http://127.0.0.1:8000/logout/">Logout</a>
+</div>
+{% for i in data %}
+<div class="container">
+  <div class="todo">
+    <h3>{{i.task_name}}</h3>
+    <p>Description: {{i.description}}</p>
+    <p>Status: {{i.is_completed}}</p>
+    <p>Date: {{i.date}}</p>
+    <div class="actions">
+<!--      <a href="updateitem/{{i.id}}">Update</a>-->
+      <a href="{% url 'updateitem' pk=i.id %}">Update</a>
+      <a href="{% url 'deleteitem' pk=i.id %}">Delete</a>
+    </div>
+  </div>
+  {% endfor %}
+
+
+
+  <!-- Add more to-dos here -->
+
+</div>
+
+</body>
+</html>
